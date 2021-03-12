@@ -1,0 +1,34 @@
+body {
+    padding-top: 50px;
+}
+
+.principal {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+/*
+.btn_submit
+{
+  border-style:dashed;
+  position:center;
+  bottom: 0.8em;
+  right:20px;
+  background-color:#cacac49a;
+  border: 2px solid #0b0b0c;
+  margin: 5 auto;  //margem entre a tabela/campo e o botão
+
+}
+*/
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+

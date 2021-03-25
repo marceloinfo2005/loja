@@ -1,17 +1,42 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+// Conexão db e cabeçalho/rodapé
+require_once 'php_action/db-connect.php';
+include_once 'includes/header.php';
+include_once 'includes/message.php';    //busca o session o o javascript do TOAST = mensagens de exluir e adiciona
+include_once 'includes/funcoes.php';
 ?>
 
 <?php
-include_once 'db-connect.php';
-include_once 'includes/header.php';
-include_once 'includes/message.php';
+// Verificação se o usuário esta logado
+if(!isset($_SESSION['logado'])):
+    header('Location: login/index.php');
+endif;
+
+// Dados
+$id = $_SESSION['id_usuario'];
+$sql = "SELECT * FROM usuarios WHERE id = '$id'";
+$resultado = mysqli_query($connect, $sql);
+$dados = mysqli_fetch_array($resultado);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <h1> Olá <?php echo $dados['nome']; ?> </h1>
+                        
+</body>
+</html>
+
 
 <div class='row'>
     <div class="col s12 m8 push-m2">
-        <h3 class="light"> Produtos </h3>
+        <h3 class="light"> Produtos Loja </h3>
             <table class="stripped">
                 <thead>
                     <tr>
@@ -33,15 +58,16 @@ include_once 'includes/message.php';
                     ?>
                     <tr>
                         <td><?php echo $dados['nome']; ?></td>
-                        <td><?php echo $dados['preco']; ?></td>
+                        <td><?= reais ($dados['preco']) ?></td> <!-- chamando a funcao 'reais' que forma em formato de moeda BRL-->
 
-                        <td><a href="editar.php?id=<?php echo $dados['id']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
+                        <td><a href="editar-produto.php?id=<?php echo $dados['id']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
                         </i></a></td>
 
                         <td><a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
                         </i></a></td>
 
-                        <!-- Modal Structure -->
+                        <!-- Modal Structure MENSAGENS QUE APARECEM NA TELA -->
+
                         <div id="modal<?php echo $dados['id']; ?>" class="modal">
                                 <div class="modal-content">
                                 <h4>Opa !!</h4>
@@ -49,7 +75,7 @@ include_once 'includes/message.php';
                             </div>
                             <div class="modal-footer">
                                 
-                                <form action="delete.php" method="POST">  <!-- faz o delete no banco de dados -->
+                                <form action="php_action/delete.php" method="POST">  <!--Botao que chama o arquivo que deleta no banco de dados -->
                                     <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
                                     <button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
 
@@ -77,6 +103,7 @@ include_once 'includes/message.php';
           </table>
           <a href="produto-formulario.php" class="btn">Adicionar Produto</a>
       </div>  
+  </div>
 </div>
 
 <?php

@@ -27,6 +27,7 @@
                     <li><a href="produto-formulario.php">Adiciona Produto</a></li>
                     <li><a href="sobre.php">Sobre</a></li>
                     <li><a href="index.php">Lista Produtos</a></li>
+                    <li><a href="login/logout.php">Sair</a></li>
                 </ul>
             </div>
         </div><!-- container acaba aqui -->

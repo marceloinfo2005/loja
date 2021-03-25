@@ -11,5 +11,5 @@ if(isset($_SESSION['mensagem'])): ?>  <!--- verifica se existe uma sessão chama
 
 <?php
 endif;
-session_unset(); //limpar a sessão depois de exibida
+//session_unset(); //limpar a sessão depois de exibida
 ?>

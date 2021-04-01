@@ -3,14 +3,15 @@
 
 require_once('/var/www/html/loja/php_action/db-connect.php');
 
-
 //Sessão
 
 session_start();
 
 // Botão enviar
+?>
 
-if(isset($_POST['btn-entrar'])):
+<?php
+if(isset($_POST['btn-entrar'])): //dando comando ao botão
         $erros = array();
         $login = mysqli_escape_string($connect, $_POST['login']);
         $senha = mysqli_escape_string($connect, $_POST['senha']);
@@ -36,7 +37,7 @@ if(isset($_POST['btn-entrar'])):
 
                         header('Location: /loja/index.php');  // redireciona para a tela do sistema
                     else:
-                     $erros[] = "<li> Usuário e senha não conferem </li>";
+                     $erros[] = " <li> Usuário e senha não conferem </li>";
                 endif;    
             else:
                 $erros[] = "<li> Usuário inexistente </li>";
@@ -44,20 +45,19 @@ if(isset($_POST['btn-entrar'])):
 
         endif;    
 endif;
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-</head>
+        <link rel="stylesheet" type="text/css" href="../css/login_style.css">
 <body>
-
-<h1> Login Loja </h1>
-
+    
 <?php
 if(!empty($erros)):
     foreach($erros as $erro):
@@ -65,12 +65,20 @@ if(!empty($erros)):
     endforeach;
 endif;
 ?>
-<hr>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-Login: <input type="text" name="login"><br>
-Senha: <input type="password" name="senha"><br>
-<button type="submit" name="btn-entrar"> Entrar </button>
-</form>
+    <div class="loginbox">
+        <img src="avatar.png" class="avatar">
+        <h1> Login Loja </h1>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <p>Usuário</p> 
+        <input type="text" name="login" placeholder="Digite o usuário"><br>
+        <p>Senha</p>
+        <input type="password" name="senha" placeholder="Digite a senha"><br>
+       <!-- <button type="submit" name="btn-entrar" value="Login"> </button> -->
+        <input type="submit" name="btn-entrar" value="Login">
+        </form>
+    </div>
+   
 
 </body>
+</head>
 </html>

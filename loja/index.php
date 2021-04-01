@@ -48,6 +48,7 @@ $dados = mysqli_fetch_array($resultado);
                 </thead>
                 
                 <tbody>
+                <a href="produto-formulario.php" class="btn">Adicionar Produto</a>
                     <?php
                         $sql = "SELECT * FROM produto";
                         $result = mysqli_query($connect, $sql);
@@ -67,7 +68,6 @@ $dados = mysqli_fetch_array($resultado);
                         </i></a></td>
 
                         <!-- Modal Structure MENSAGENS QUE APARECEM NA TELA -->
-
                         <div id="modal<?php echo $dados['id']; ?>" class="modal">
                                 <div class="modal-content">
                                 <h4>Opa !!</h4>
@@ -75,7 +75,7 @@ $dados = mysqli_fetch_array($resultado);
                             </div>
                             <div class="modal-footer">
                                 
-                                <form action="php_action/delete.php" method="POST">  <!--Botao que chama o arquivo que deleta no banco de dados -->
+                                <form action="php_action/delete.php" method="POST">  <!--Botão que chama o arquivo que deleta no banco de dados -->
                                     <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
                                     <button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
 
@@ -101,7 +101,7 @@ $dados = mysqli_fetch_array($resultado);
 
                 </tbody>
           </table>
-          <a href="produto-formulario.php" class="btn">Adicionar Produto</a>
+          
       </div>  
   </div>
 </div>

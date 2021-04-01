@@ -1,12 +1,21 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'On');
+?>
+
+<?php
+
+
+// Verifica banco de dados e message.php
 
 require_once 'db-connect.php';
-require_once 'includes/message.php';
+require_once '/var/www/html/loja/includes/message.php';
 
 // Verificação se o usuário esta logado
 if(!isset($_SESSION['logado'])):
     header('Location: login/index.php');
 endif;
+
 
 
 function clear($input) {
@@ -19,8 +28,8 @@ function clear($input) {
 if (isset($_POST['btn-cadastrar'])):
     $nome = clear($_POST['nome']);
     $preco = clear($_POST['preco']);
-
-    $query = "insert into produto (nome, preco) values ('{$nome}', {$preco})";
+    $descricao = clear($_POST['descricao']);
+    $query = "insert into produto (nome, preco, descricao) values ('{$nome}', '{$preco}', '{$descricao}')";
 
     if(mysqli_query($connect, $query)):
         $_SESSION['mensagem'] = "Cadastrado com sucesso";
